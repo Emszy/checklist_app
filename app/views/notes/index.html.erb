@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<center>
+  <%= link_to 'New Note', new_note_path , :class => 'btn btn-success'%>
+</center><br>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Note</th>
+      <th>Done</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @notes.each do |note| %>
+      
+      <% if note.done == false %>
+        <% btn_class = 'btn btn-warning' %>
+      <% else %>
+        <% btn_class = 'btn btn-info' %>
+      <% end %>
+
+      <tr>
+        <td><%= note.name %></td>
+        <td><%= note.date %></td>
+        <td><%= note.note %></td>
+        <td><%= link_to "#{note.done}", root_path(note, :toggle => note.done, :id => note.id), :class => btn_class %> </td>
+        <td><%= link_to 'Show', note %></td>
+        <td><%= link_to 'Edit', edit_note_path(note) %></td>
+        <td><%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<center>
+  <%= link_to 'New Note', new_note_path , :class => 'btn btn-success'%>
+</center>
+<br>

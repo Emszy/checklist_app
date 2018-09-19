@@ -1,0 +1,114 @@
+
+
+
+<%= form_with(model: note, local: true) do |form| %>
+  <% if note.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(note.errors.count, "error") %> prohibited this note from being saved:</h2>
+
+      <ul>
+      <% note.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+
+<div class="multi-form">
+  <div class="card text-center">
+    <div class="card-body">
+      <div class="form-row">
+        <div class="col">
+          <label for="note_name">Name</label><br>
+          <input class="form-control note_name" type="text" name="notes[notes][]note[name]" id="note_name">
+        </div>
+        <div class="col">
+          <label for="note_note">Note</label><br>
+          <textarea class="form-control note_notes" class="form-group" name="notes[notes][]note[note]" id="note_note"></textarea>
+        </div>
+        <div class="field">
+          <label for="note_done" hidden>Done</label><br>
+          <input name="notes[notes][]note[done]" type="hidden" value="0"><input type="checkbox" value="1" name="note[done]" id="note_done" hidden>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    
+</div>
+
+<br>
+<center>
+  <button type='button' class="add_more_form btn btn-info">
+    Add Note
+  </button>
+
+  <button type='button' class="remove_note btn btn-danger">
+    Remove Note
+  </button>
+
+
+  <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+   <i class="icon-ok icon-white"></i> SAVE NOTES
+
+
+  <% end %>
+  <%= link_to 'Back', notes_path, :class => 'btn btn-warning' %>
+
+</center>
+<% end %>
+
+
+     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+
+<script type="text/javascript">
+  var count = 0;
+  
+
+
+$( ".add_more_form" ).on( "click", function() {
+
+  var form_string = '<div class="card text-center '+count+'">\
+                      <div class="card-body">\
+                        <div class="form-row">\
+                          <div class="col">\
+                            <label for="note_name">Name</label><br>\
+                            <input class="form-control note_name" type="text" name="notes[notes][]note[name]" id="note_name">\
+                          </div>\
+                          <div class="col">\
+                            <label for="note_note">Note</label><br>\
+                            <textarea class="form-control note_notes" class="form-group" name="notes[notes][]note[note]" id="note_note"></textarea>\
+                          </div>\
+                          <div class="field">\
+                            <label for="note_done" hidden>Done</label><br>\
+                            <input name="notes[notes][]note[done]" type="hidden" value="0"><input type="checkbox" value="1" name="note[done]" id="note_done" hidden>\
+                          </div>\
+                        </div>\
+                      </div>\
+                    </div>'
+
+  $('.multi-form').append(form_string);
+    count++;
+    console.log(count);
+});
+
+$( ".remove_note" ).on( "click", function() {
+  if (count > 0)
+  {
+    count--;
+    console.log(count);
+    $('.'+count).remove();
+  }
+});
+
+
+
+</script>
+
